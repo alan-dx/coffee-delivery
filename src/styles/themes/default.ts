@@ -1,3 +1,1 @@
-export const defaultTheme = {
-  
-}
+export const defaultTheme = {}

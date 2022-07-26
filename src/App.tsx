@@ -3,9 +3,8 @@ import { GlobalStyle } from './styles/global'
 import { defaultTheme } from './styles/themes/default'
 
 function App() {
-
   return (
-    <ThemeProvider theme={defaultTheme} >
+    <ThemeProvider theme={defaultTheme}>
       <h1>HEELLOW</h1>
       <GlobalStyle />
     </ThemeProvider>
