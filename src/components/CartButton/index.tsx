@@ -1,19 +1,20 @@
-import React from 'react'
+import React, { ButtonHTMLAttributes } from 'react'
 import { ShoppingCart } from 'phosphor-react'
 
 import { Container, ItemsBadge } from './styles'
 
-interface ChartButtonProps {
+interface CartButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'purple' | 'yellow'
   itemsCounter?: number
 }
 
-export function ChartButton({
+export function CartButton({
   variant = 'purple',
   itemsCounter = 0,
-}: ChartButtonProps) {
+  ...rest
+}: CartButtonProps) {
   return (
-    <Container variant={variant}>
+    <Container variant={variant} {...rest}>
       <ShoppingCart size={22} weight="fill" />
       {!!itemsCounter && <ItemsBadge>{itemsCounter}</ItemsBadge>}
     </Container>

@@ -13,23 +13,25 @@ import {
 } from './styles'
 
 import { Badge } from '../Badge'
-import { ChartButton } from '../ChartButton'
+import { CartButton } from '../CartButton'
 import { ItemCounter } from '../ItemCounter'
 import { Coffee } from '../../@types/Coffee'
+import { useCart } from '../../hooks/useCart'
 
 interface CoffeeCardProps {
   data: Coffee
 }
 
 export function CoffeeCard({ data }: CoffeeCardProps) {
-  const [chartCounter, setChartCounter] = React.useState(1)
+  const [amountCounter, setAmountCounter] = React.useState(1)
+  const { handleAddItemToCart } = useCart()
 
-  function handleAddItemOnChart() {
-    setChartCounter((prevState) => prevState + 1)
+  function handleIncrementItem() {
+    setAmountCounter((prevState) => prevState + 1)
   }
 
-  function handleRemoveItemOnChart() {
-    setChartCounter((prevState) => {
+  function handleRemoveItem() {
+    setAmountCounter((prevState) => {
       if (prevState === 1) {
         return prevState
       } else {
@@ -38,10 +40,18 @@ export function CoffeeCard({ data }: CoffeeCardProps) {
     })
   }
 
+  function handleSendItemsToCart() {
+    handleAddItemToCart({
+      id: data.id,
+      amount: amountCounter,
+    })
+    setAmountCounter(1)
+  }
+
   return (
     <Container>
       <ImageBox>
-        <img src={data['image-url']} />
+        <img src={data['image-url']} alt={'Xícara de' + data.name} />
         <BadgesBox>
           {data.tags.map((tag) => (
             <Badge text={tag} key={tag} />
@@ -62,11 +72,11 @@ export function CoffeeCard({ data }: CoffeeCardProps) {
         </Price>
         <ActionsBox>
           <ItemCounter
-            addItem={handleAddItemOnChart}
-            removeItem={handleRemoveItemOnChart}
-            counter={chartCounter}
+            addItem={handleIncrementItem}
+            removeItem={handleRemoveItem}
+            counter={amountCounter}
           />
-          <ChartButton />
+          <CartButton onClick={handleSendItemsToCart} />
         </ActionsBox>
       </PriceBox>
     </Container>
