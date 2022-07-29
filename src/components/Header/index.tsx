@@ -8,7 +8,7 @@ import { useCart } from '../../hooks/useCart'
 export function Header() {
   const { cartItems } = useCart()
 
-  const itemsAmount = cartItems.reduce((acc, item) => {
+  const itemsAmount = cartItems?.reduce((acc, item) => {
     return acc + item.amount
   }, 0)
 
