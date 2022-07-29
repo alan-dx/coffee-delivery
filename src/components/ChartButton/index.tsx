@@ -10,12 +10,12 @@ interface ChartButtonProps {
 
 export function ChartButton({
   variant = 'purple',
-  itemsCounter = 1,
+  itemsCounter = 0,
 }: ChartButtonProps) {
   return (
     <Container variant={variant}>
       <ShoppingCart size={22} weight="fill" />
-      {!!itemsCounter && <ItemsBadge>3</ItemsBadge>}
+      {!!itemsCounter && <ItemsBadge>{itemsCounter}</ItemsBadge>}
     </Container>
   )
 }
