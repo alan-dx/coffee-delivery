@@ -7,6 +7,8 @@ export const Container = styled.span`
   color: ${(props) => props.theme['yellow-dark']};
   background-color: ${(props) => props.theme['yellow-light']};
 
+  text-transform: uppercase;
+
   font-weight: 700;
   font-size: 0.625rem;
 `

@@ -13,5 +13,7 @@ export const Container = styled.div`
 `
 export const List = styled.div`
   display: flex;
+  flex-wrap: wrap;
   margin-top: 3.4rem;
+  gap: 2.5rem;
 `

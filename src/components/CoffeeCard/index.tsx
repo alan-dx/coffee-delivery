@@ -12,12 +12,16 @@ import {
   PriceBox,
 } from './styles'
 
-import coffeeImg from '../../assets/expresso.svg'
 import { Badge } from '../Badge'
 import { ChartButton } from '../ChartButton'
 import { ItemCounter } from '../ItemCounter'
+import { Coffee } from '../../@types/Coffee'
 
-export function CoffeeCard() {
+interface CoffeeCardProps {
+  data: Coffee
+}
+
+export function CoffeeCard({ data }: CoffeeCardProps) {
   const [chartCounter, setChartCounter] = React.useState(1)
 
   function handleAddItemOnChart() {
@@ -37,20 +41,24 @@ export function CoffeeCard() {
   return (
     <Container>
       <ImageBox>
-        <img src={coffeeImg} />
+        <img src={data['image-url']} />
         <BadgesBox>
-          <Badge text="TRADICIONAL" />
+          {data.tags.map((tag) => (
+            <Badge text={tag} key={tag} />
+          ))}
         </BadgesBox>
       </ImageBox>
       <InfoBox>
-        <CoffeeTitle>Expresso Tradicional</CoffeeTitle>
-        <CoffeeDescription>
-          Meio a meio de expresso tradicional com leite vaporizado
-        </CoffeeDescription>
+        <CoffeeTitle>{data.name}</CoffeeTitle>
+        <CoffeeDescription>{data.description}</CoffeeDescription>
       </InfoBox>
       <PriceBox>
         <Price>
-          <small>R$</small> 9,90
+          <small>R$</small>{' '}
+          {data.price.toLocaleString('pt-BR', {
+            minimumFractionDigits: 2,
+            signDisplay: 'never',
+          })}
         </Price>
         <ActionsBox>
           <ItemCounter

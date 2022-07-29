@@ -22,6 +22,11 @@ export const Button = styled.button`
 
   svg {
     color: ${(props) => props.theme.purple};
+    transition: color 0.2s;
+
+    &:hover {
+      color: ${(props) => props.theme['purple-dark']};
+    }
   }
 `
 export const Counter = styled.span`
