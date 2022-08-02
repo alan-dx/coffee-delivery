@@ -15,11 +15,11 @@ export function ItemCounter({
 }: ItemCounterProps) {
   return (
     <Container>
-      <Button onClick={removeItem}>
+      <Button onClick={removeItem} type="button">
         <Minus />
       </Button>
       <Counter>{counter}</Counter>
-      <Button onClick={addItem}>
+      <Button onClick={addItem} type="button">
         <Plus />
       </Button>
     </Container>

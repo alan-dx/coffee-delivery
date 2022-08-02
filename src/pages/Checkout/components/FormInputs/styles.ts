@@ -6,6 +6,11 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+
+  strong {
+    font-family: 'Baloo 2', cursive;
+    font-size: 1.125rem;
+  }
 `
 export const FormContentBox = styled.div`
   background-color: ${(props) => props.theme['base-card']};
