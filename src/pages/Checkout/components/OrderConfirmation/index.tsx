@@ -1,4 +1,5 @@
 import React from 'react'
+import { Coffee } from '../../../../@types/Coffee'
 import { CoffeeOrderItem } from '../../../../components/CoffeeOrderItem'
 
 import {
@@ -11,13 +12,26 @@ import {
   OrderInfoBox,
 } from './styles'
 
-export function OrderConfirmation() {
+interface OrderConfirmationProps {
+  data: Coffee[]
+  onRemoveItem: (id: number) => void
+}
+
+export function OrderConfirmation({
+  data,
+  onRemoveItem,
+}: OrderConfirmationProps) {
   return (
     <Container>
       <strong>Cafés selecionados</strong>
       <OrderInfoBox>
-        <CoffeeOrderItem />
-        <CoffeeOrderItem />
+        {data.map((coffee) => (
+          <CoffeeOrderItem
+            key={coffee.id}
+            coffee={coffee}
+            onPressRemoveButton={onRemoveItem}
+          />
+        ))}
         <OrderFinishBox>
           <OrderFinishItemsBox>
             <OrderFinishItem>

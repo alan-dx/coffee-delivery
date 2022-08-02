@@ -1,12 +1,21 @@
 import { Trash } from 'phosphor-react'
 import React from 'react'
 import { useTheme } from 'styled-components'
+import { Coffee } from '../../@types/Coffee'
 import { ItemCounter } from '../ItemCounter'
 
 import { Container, InfoBox, InfoButtonsBox, RemoveButton } from './styles'
 
-export function CoffeeOrderItem() {
-  const [counter, setCounter] = React.useState(2)
+interface CoffeeOrderItemProps {
+  onPressRemoveButton: (id: number) => void
+  coffee: Coffee
+}
+
+export function CoffeeOrderItem({
+  onPressRemoveButton,
+  coffee,
+}: CoffeeOrderItemProps) {
+  const [counter, setCounter] = React.useState(coffee.orderAmount || 0)
 
   const theme = useTheme()
 
@@ -26,22 +35,28 @@ export function CoffeeOrderItem() {
 
   return (
     <Container>
-      <img src="/arabe.svg" />
+      <img src={coffee['image-url']} alt={'Xícara de ' + coffee.name} />
       <InfoBox>
-        <span>Expresso Tradicional</span>
+        <span>{coffee.name}</span>
         <InfoButtonsBox>
           <ItemCounter
             counter={counter}
             addItem={handleAddItem}
             removeItem={handleRemoveItem}
           />
-          <RemoveButton>
+          <RemoveButton onClick={() => onPressRemoveButton(coffee.id)}>
             <Trash size={16} color={theme.purple} />
             <span>REMOVER</span>
           </RemoveButton>
         </InfoButtonsBox>
       </InfoBox>
-      <strong>R$ 9,90</strong>
+      <strong>
+        {coffee.price.toLocaleString('pt-BR', {
+          minimumFractionDigits: 2,
+          style: 'currency',
+          currency: 'BRL',
+        })}
+      </strong>
     </Container>
   )
 }

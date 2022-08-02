@@ -14,7 +14,7 @@ import {
 import { useTheme } from 'styled-components'
 import { Input } from '../../../../components/Input'
 
-export function FormInputs() {
+const FormInputsBase = () => {
   const theme = useTheme()
 
   return (
@@ -79,3 +79,5 @@ export function FormInputs() {
     </Container>
   )
 }
+
+export const FormInputs = React.memo(FormInputsBase)

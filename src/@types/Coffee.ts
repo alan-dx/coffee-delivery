@@ -5,4 +5,5 @@ export type Coffee = {
   price: number
   'image-url': string
   tags: string[]
+  orderAmount?: number
 }
