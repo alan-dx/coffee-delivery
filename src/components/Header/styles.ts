@@ -5,6 +5,13 @@ export const Container = styled.header`
   align-items: center;
   justify-content: space-between;
 
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+
+  width: 100%;
+  background-color: ${(props) => props.theme.background};
+
   padding: 2rem 0;
 `
 export const InfoBox = styled.div`
