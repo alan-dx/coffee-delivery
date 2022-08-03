@@ -13,9 +13,12 @@ import {
 } from './styles'
 import { useTheme } from 'styled-components'
 import { Input } from '../../../../components/Input'
+import { useFormContext } from 'react-hook-form'
 
 const FormInputsBase = () => {
   const theme = useTheme()
+
+  const { register } = useFormContext()
 
   return (
     <Container>
@@ -29,16 +32,25 @@ const FormInputsBase = () => {
           </AddressTextBox>
         </AddressHeader>
         <InputsBox>
-          <Input placeholder="CEP" variant="medium" />
-          <Input placeholder="Rua" />
+          <Input placeholder="CEP" variant="medium" {...register('cep')} />
+          <Input placeholder="Rua" {...register('street')} />
           <InputBox>
-            <Input placeholder="Número" variant="medium" type="number" />
-            <Input placeholder="Complemento" />
+            <Input
+              placeholder="Número"
+              variant="medium"
+              type="number"
+              {...register('number', { valueAsNumber: true })}
+            />
+            <Input placeholder="Complemento" {...register('complement')} />
           </InputBox>
           <InputBox>
-            <Input placeholder="Bairro" variant="medium" />
-            <Input placeholder="Cidade" />
-            <Input placeholder="UF" variant="small" />
+            <Input
+              placeholder="Bairro"
+              variant="medium"
+              {...register('district')}
+            />
+            <Input placeholder="Cidade" {...register('city')} />
+            <Input placeholder="UF" variant="small" {...register('uf')} />
           </InputBox>
         </InputsBox>
       </FormContentBox>
@@ -57,22 +69,22 @@ const FormInputsBase = () => {
             data-label="CARTÃO DE CRÉDITO"
             type="radio"
             id="male"
-            name="gender"
-            value="male"
+            value="card-credit"
+            {...register('payment')}
           />
           <RadioButton
             data-label="CARTÃO DE DÉBITO"
             type="radio"
             id="female"
-            name="gender"
-            value="female"
+            value="card-debit"
+            {...register('payment')}
           />
           <RadioButton
             data-label="DINHEIRO"
             type="radio"
             id="female2"
-            name="gender"
-            value="female2"
+            value="card-money"
+            {...register('payment')}
           />
         </RadioButtonsBox>
       </FormContentBox>

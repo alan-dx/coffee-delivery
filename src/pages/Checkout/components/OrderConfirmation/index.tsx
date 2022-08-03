@@ -1,6 +1,6 @@
-import React from 'react'
 import { Coffee } from '../../../../@types/Coffee'
 import { CoffeeOrderItem } from '../../../../components/CoffeeOrderItem'
+import { useCart } from '../../../../hooks/useCart'
 
 import {
   ConfirmOrderButton,
@@ -21,6 +21,18 @@ export function OrderConfirmation({
   data,
   onRemoveItem,
 }: OrderConfirmationProps) {
+  const { cartItems } = useCart()
+
+  const totalItemsPrice = data.reduce((acc, item) => {
+    return acc + item.price * item.orderAmount!
+  }, 0)
+
+  const deliveryPrice = 3.5
+
+  const sumTotalItemsDelivery = totalItemsPrice + deliveryPrice
+
+  const isSubmitButtonDisabled = cartItems.length === 0
+
   return (
     <Container>
       <strong>Cafés selecionados</strong>
@@ -36,7 +48,13 @@ export function OrderConfirmation({
           <OrderFinishItemsBox>
             <OrderFinishItem>
               <span>Total de itens</span>
-              <span>R$ 29,70</span>
+              <span>
+                {totalItemsPrice.toLocaleString('pt-BR', {
+                  minimumFractionDigits: 2,
+                  style: 'currency',
+                  currency: 'BRL',
+                })}
+              </span>
             </OrderFinishItem>
             <OrderFinishItem>
               <span>Entrega</span>
@@ -44,10 +62,18 @@ export function OrderConfirmation({
             </OrderFinishItem>
             <OrderFinishTotal>
               <span>Total</span>
-              <span>R$ 3,50</span>
+              <span>
+                {sumTotalItemsDelivery.toLocaleString('pt-BR', {
+                  minimumFractionDigits: 2,
+                  style: 'currency',
+                  currency: 'BRL',
+                })}
+              </span>
             </OrderFinishTotal>
           </OrderFinishItemsBox>
-          <ConfirmOrderButton>CONFIRMAR PEDIDO</ConfirmOrderButton>
+          <ConfirmOrderButton type="submit" disabled={isSubmitButtonDisabled}>
+            CONFIRMAR PEDIDO
+          </ConfirmOrderButton>
         </OrderFinishBox>
       </OrderInfoBox>
     </Container>

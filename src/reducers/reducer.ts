@@ -25,10 +25,36 @@ export function cartStateReducer(state: CartItem[], action: any) {
 
       return newList
     }
-    case ActionTypes.REMOVE_ITEM: {
+
+    case ActionTypes.REMOVE_ITEM_FROM_CART: {
       const newList = state.filter((item) => item.id !== action.payload.id)
       return newList
     }
+
+    case ActionTypes.DECREMENT_ITEM_ON_CART: {
+      const newList = state.map((item) => {
+        if (item.id === action.payload.id) {
+          item.amount -= 1
+        }
+
+        return item
+      })
+
+      return newList
+    }
+
+    case ActionTypes.INCREMENT_ITEM_ON_CART: {
+      const newList = state.map((item) => {
+        if (item.id === action.payload.id) {
+          item.amount += 1
+        }
+
+        return item
+      })
+
+      return newList
+    }
+
     default:
       return state
   }

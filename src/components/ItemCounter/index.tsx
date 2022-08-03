@@ -15,7 +15,7 @@ export function ItemCounter({
 }: ItemCounterProps) {
   return (
     <Container>
-      <Button onClick={removeItem} type="button">
+      <Button onClick={removeItem} type="button" disabled={counter === 1}>
         <Minus />
       </Button>
       <Counter>{counter}</Counter>
