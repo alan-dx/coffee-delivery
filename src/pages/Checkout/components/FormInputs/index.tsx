@@ -41,7 +41,11 @@ const FormInputsBase = () => {
               type="number"
               {...register('number', { valueAsNumber: true })}
             />
-            <Input placeholder="Complemento" {...register('complement')} />
+            <Input
+              placeholder="Complemento"
+              isOptional
+              {...register('complement')}
+            />
           </InputBox>
           <InputBox>
             <Input
